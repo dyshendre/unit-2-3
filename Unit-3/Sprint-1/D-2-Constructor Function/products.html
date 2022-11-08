@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #products_data{
+          display: flex;
+          width:100%;
+          display:grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows:auto;
+          gap:10px 20px;
+        }
+        .picture{
+          width:100%;
+        }
+        .picture>img{
+          width:100%;
+        }
+      </style>
+</head>
+<body>
+    <div id="products_data">
+        <!--append all products data here in grid format-->
+      </div>
+</body>
+</html>
+<script>
+let arrFromLS=JSON.parse(localStorage.getItem("Products")) || [];
+console.log(arrFromLS);
+displayTable(arrFromLS);
+let newarr=[];
+function displayTable(arrFromLS){
+    document.getElementById("products_data").innerHTML="";
+    arrFromLS.forEach(function (elem,index){
+      // console.log(elem);
+      
+      let div=document.createElement("div");
+
+      let p1=document.createElement("p");
+      p1.innerText="Brand: "+elem.name;
+
+      let p2=document.createElement("p");
+      p2.innerText="Name: "+elem.category;
+
+      let p3=document.createElement("p");
+      p3.innerText="Price: "+elem.price;
+
+      let p4=document.createElement("p");
+      p4.innerText="Gender: "+elem.select;
+
+      let pic=document.createElement("img");
+      pic.setAttribute("src",elem.image);
+      pic.setAttribute("class","picture");
+      
+      let button1=document.createElement("button");
+      button1.innerText="Remove";
+      button1.style.backgroundColor= "red";
+      
+      button1.addEventListener("click",function(){
+        deleteBox(index);
+    });
+    
+    let addToCart=document.createElement("button");
+            addToCart.setAttribute("id","sold")
+            addToCart.innerText="For Sell";
+            addToCart.style.backgroundColor="green";
+            addToCart.addEventListener("click",function(){
+                if(addToCartFunct(elem.name)==true)
+                {
+                    alert("Added to cart")
+                    addToCart.innerText="Sold";
+                    addToCart.style.backgroundColor="red";
+                    console.log(elem.name);
+                    newarr.push(elem);
+                    localStorage.setItem("cart",JSON.stringify(newarr));
+                }else{
+                    // addToCart.innerText="Sold";
+                    // addToCart.style.backgroundColor="red";
+                    console.log(elem.name);
+                    alert("Already sold")
+                }
+            })
+
+
+      div.append(p1,p2,p3,p4,pic,button1,addToCart);
+      document.getElementById("products_data").append(div);
+    })
+  }
+
+    function deleteBox(index){
+        // event.target.parentNode.remove();
+        // console.log(event.target.parentNode);
+
+        // console.log(index);
+        arrFromLS.splice(index,1);
+        localStorage.setItem("Products",JSON.stringify(arrFromLS));
+        //window.location.reload();
+         displayTable(arrFromLS);
+    }
+
+
+
+    function addToCartFunct(id){
+        for(i=0;i<newarr.length;i++){
+            if(newarr[i].name==id){
+                return false;
+            }
+        }
+        return true;
+    }
+</script>
+
+

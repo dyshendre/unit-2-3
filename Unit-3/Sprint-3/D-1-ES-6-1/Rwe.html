@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R Youtube</title>
+    <style>
+        #container{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Youtube</h1>
+    <input type="text" id="query">
+    <button onclick="search()">search</button>
+    
+    <div id="container"></div>
+</body>
+</html>
+<script>
+    const API_KEY="AIzaSyCYuvLXXmUfMQRowIvu-gFYCs1Bnszl8t4";
+    
+let search=async()=>{
+    let query=document.getElementById("query").value;
+
+    let url=`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&key=${API_KEY}`; 
+    let res=await fetch(url);
+   
+    // let data=await res.json();
+    // console.log("data:",data);
+    // return data.items;
+
+    let {items}=await res.json();
+    console.log("items: ",items);
+
+    appendVideos(items);
+};
+
+
+let appendVideos=(data)=>{
+    let container=document.getElementById("container");
+    container.innerHTML=null;
+    data.forEach(({snippet:{title},snippet:{thumbnails:{medium:{url}}},id:{videoId}})=>{
+        console.log("title:",title);
+        console.log("img:",url);
+        console.log("videoId:",videoId);
+
+        let div=document.createElement("div");
+        div.onclick=()=>{
+            saveVideo(videoId);
+        };
+        div.setAttribute("class","videos");
+       
+        /*To show video*/
+        // let iframe=document.createElement("iframe");
+        // iframe.src=`https://www.youtube.com/embed/${videoId}`
+
+        // iframe.width='100%';
+        // iframe.height='70%';
+        // iframe.allow="fullscreen";
+
+        /*To show image*/
+        let img=document.createElement("img");
+        img.src=url;
+
+        let name=document.createElement("h5");
+        name.innerText=title;
+
+        div.append(img,name);
+
+        container.append(div);
+    });
+}
+
+let saveVideo=(data)=>{
+    localStorage.setItem("video",JSON.stringify(data));
+    window.location.href="Rvideo.html";
+}
+
+</script> 

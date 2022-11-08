@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        <h1>Profile</h1>
+        <div id="container">
+
+        </div>
+        <div id="container2">
+
+        </div>
+    </body>
+</html>
+<script>
+    let users=JSON.parse(localStorage.getItem("signup"))||[];
+    let profile=JSON.parse(localStorage.getItem("profileData"));
+    console.log(profile);
+    let filter1=users.filter(function(el){
+        return el.username==profile;   
+    })
+    console.log(filter1);
+
+
+    let filter2=users.map(function(el,index){
+        if(el.username==profile)
+        {
+            return index;
+        }  
+    })
+
+    let change=0;
+    for(let i=0;i<filter2.length;i++)
+    {
+        if(filter2[i]!=undefined)
+        {
+            change=change+filter2[i];
+        }
+    }
+    console.log("index value to be replaced: "+change);
+    
+    display(filter1);
+    
+    function display(filter1){
+        let container=document.getElementById("container");
+        container.innerHTML=null;
+
+         let p1=document.createElement("p");
+         p1.innerText="Name: "+filter1[0].name;
+
+         let p2=document.createElement("p");
+         p2.innerText="Username: "+filter1[0].username;
+
+         let p3=document.createElement("p");
+         p3.innerText="Password: "+filter1[0].password;
+
+         let edit=document.createElement("button");
+         edit.innerText="Edit";
+         edit.addEventListener("click",function(){
+            editfunct();
+         })
+
+         container.append(p1,p2,p3,edit);
+    }
+    function editfunct(){
+        let container=document.getElementById("container2");
+        container.innerHTML=null;
+        
+        let p0=document.createElement("p");
+        p0.innerText="Edit username";
+        let input0=document.createElement("input");
+        input0.setAttribute("id","input0");
+
+        let p1=document.createElement("p");
+        p1.innerText="Edit username";
+        let input1=document.createElement("input");
+        input1.setAttribute("id","input1");
+
+        let p2=document.createElement("p");
+        p2.innerText="Edit password";
+        let input2=document.createElement("input");
+        input2.setAttribute("id","input2");  
+
+        let submit=document.createElement("button");
+        submit.innerText="Submit";
+        submit.addEventListener("click",function(){
+            submitfunct();
+        })
+
+        container.append(p0,input0,p1,input1,p2,input2,submit);
+    }
+
+    function submitfunct(){
+        let obj={
+            name: document.getElementById("input0").value,
+
+            username:document.getElementById("input1").value,
+
+            password:document.getElementById("input2").value,
+
+            type:"student",
+        }
+        users[change]=obj;
+        console.log(users);
+        
+        localStorage.setItem("signup",JSON.stringify(users));
+        
+        let profile=[];
+        profile.push(obj.username);
+        console.log(profile);
+        localStorage.setItem("profileData",JSON.stringify(profile));
+        
+        window.location.reload();
+    }
+</script>

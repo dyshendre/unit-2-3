@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #movies_data {
+            display: flex;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto;
+            gap: 10px 20px;
+        }
+
+        .picture {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <select id="sort">
+        <option value="">Select</option>
+        <option id="ascending" value="LtoH">Low to High</option>
+        <option id="descending" value="HtoL">High to Low</option>
+    </select> -->
+    <button id="ascending">Low to High</button>
+    <button id="descending">High to Low</button>
+    <div id="movies_data">
+
+    </div>
+</body>
+
+</html>
+<script>
+    let newarr = JSON.parse(localStorage.getItem("movies")) || [];
+    display(newarr);
+
+    function display(newarr) {
+        // document.getElementById("movies_data").innerHTML="";
+        let ascending = document.getElementById("ascending");
+        ascending.addEventListener("click", function () {
+            document.getElementById("movies_data").innerHTML="";
+            newarr.sort(function (a, b) {
+                return a.rating - b.rating;
+            });
+            
+            showMe();
+        })
+
+        let descending = document.getElementById("descending");
+        descending.addEventListener("click", function () {
+            document.getElementById("movies_data").innerHTML="";
+            newarr.sort(function (a, b) {
+                return b.rating-a.rating;
+            });
+            
+            showMe();
+        })
+        
+        function showMe(){
+        newarr.forEach(function (elem) {
+        
+        let div = document.createElement("div");
+
+        let p1 = document.createElement("p");
+        p1.innerText = "Name: " + elem.name;
+
+        let p2 = document.createElement("p");
+        p2.innerText = "Release Date: " + elem.release;
+
+        let pic = document.createElement("img");
+        pic.setAttribute("src", elem.img_url);
+        pic.setAttribute("class", "picture");
+
+        let p3 = document.createElement("p");
+        p3.innerText = "IMDB Rating: " + elem.rating;
+
+        div.append(p1, p2, p3, pic);
+        document.getElementById("movies_data").append(div);
+    })
+ }
+}
+</script>

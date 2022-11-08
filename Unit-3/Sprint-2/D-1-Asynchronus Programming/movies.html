@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #movies_data {
+            display: flex;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto;
+            gap: 10px 20px;
+        }
+
+        .picture {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="movies_data">
+
+    </div>
+</body>
+
+</html>
+<script>
+    function template(name,release,rating,url){
+        this.name=name;
+        this.release=release;
+        this.rating=rating;
+        this.img_url=url;
+    }
+
+    let m1=new template("3 Idiots","2008","3","https://theobjectivestandard.com/wp-content/uploads/2022/03/3-Idiots-Written-and-Directed-by-Rajkumar-Hirani.jpg");
+    let m2=new template("KGF-2","2022","2","https://images.indianexpress.com/2022/04/kgf-2-1200.jpeg");
+    let m3=new template("Pushpa","2022","1","https://www.tollywood.net/wp-content/uploads/2021/12/Allu-Arjun-Pushpa-trailer-launch-event-in-Chennai-tomorrow.jpg");
+    let m4=new template("RRR","2022","5","https://cdn.gulte.com/wp-content/uploads/2022/03/RRR-Review.jpg");
+    let m5=new template("Bahubali","2015","4","https://i.ytimg.com/vi/sOEg_YZQsTI/maxresdefault.jpg");
+    let m6=new template("Iron Man","2008","6","https://www.comingsoon.net/assets/uploads/2022/04/infinity-war.jpg");
+    let m7=new template("Sairat","2016","7","https://images.indianexpress.com/2018/07/sairat-759.jpg");
+    let m8=new template("Dangal","2016","9","https://m.media-amazon.com/images/M/MV5BMTQ4MzQzMzM2Nl5BMl5BanBnXkFtZTgwMTQ1NzU3MDI@._V1_.jpg");
+    let m9=new template("Avengers","2010","8","https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg");
+    
+    let arr=[m1,m2,m3,m4,m5,m6,m7,m8,m9];
+    localStorage.setItem("movies",JSON.stringify(arr));
+    function displayTable(arr) {
+        // document.getElementById("movies_data").innerHTML = "";
+        arr.forEach(function (elem) {
+            // console.log(elem);
+
+            let div = document.createElement("div");
+
+            let p1 = document.createElement("p");
+            p1.innerText = "Name: " + elem.name;
+
+            let p2 = document.createElement("p");
+            p2.innerText = "Release Date: " + elem.release;
+
+            let pic = document.createElement("img");
+            pic.setAttribute("src", elem.img_url);
+            pic.setAttribute("class", "picture");
+
+            let p3 = document.createElement("p");
+            p3.innerText = "IMDB Rating: " + elem.rating;
+
+            div.append(p1, p2, p3,pic);
+            document.getElementById("movies_data").append(div);
+        })
+    }
+    displayTable(arr);
+</script>

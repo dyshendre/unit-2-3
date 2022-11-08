@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            width:200px;
+        }
+        #movies{
+            width:80%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:20px;
+            margin:auto;
+            height:500px;
+            overflow: scroll;
+        }
+    </style>
+</head>
+    <body>
+        <input oninput="debounce(main,2000)" 
+        type="text" 
+        id="query"
+        placeholder="enter movie name">
+
+
+        <div id="sorting">
+         <select id="sort_year" onchange="sort()">
+          <option value="">Select</option>
+          <option value="OtoN">Old to New</option>
+          <option value="NtoO">New to Old</option>
+         </select>
+        
+         <input type="number" id="filter_year" placeholder="enter year">
+         <button onclick="filter()">Search</button>
+          </div>
+
+        <div id="movies"></div>
+    </body>
+</html>
+
+<script>
+    let actual_data;
+    async function main()
+    {
+        try{
+            let query=document.getElementById("query").value;
+        // console.log("query:",query);
+
+        let res=await fetch(`http://www.omdbapi.com/?apikey=731343a7&s=${query}`);
+        
+        let data=await res.json();
+        console.log("data: ",data);
+
+        actual_data=data.Search;
+
+        appendMovies(actual_data)
+        }
+        catch(err){
+            console.log("err:",err);
+        }
+        
+    }   
+    function appendMovies(actual_data)
+    {
+        let movies_div=document.getElementById("movies");
+        movies_div.innerHTML=null;
+        actual_data.forEach(function(el){
+            let div=document.createElement("div");
+
+            let poster=document.createElement("img");
+            poster.src=el.Poster;
+
+            let p1=document.createElement("p");
+            p1.innerText=`Title: ${el.Title}`;
+
+            let p2=document.createElement("p");
+            p2.innerText=`Year: ${el.Year}`;
+
+            div.append(poster,p1,p2)
+            movies_div.append(div);
+        })
+    }
+
+    let id;
+    function debounce(func,delay)
+    {
+        //a -> debounce -> main -> setTimeout('a') ->id=1
+        //av -> debounce -> main -> setTimeout('av')->id=2
+        //ave -> debounce -> main -> setTimeout('ave')->id=3
+        
+        //current word= 'aven'
+
+        //we dont need setTimeout('ave') -> fetch('ave')
+
+        if(id){
+            console.log("id1:",id)
+            clearTimeout(id);
+        }
+        
+        id=setTimeout(function(){
+            
+            console.log("id2:",id)
+            func(); //main
+        },delay)
+    }  
+    
+    
+
+function sort() {
+
+    let V=document.getElementById("sort_year").value;
+    
+   if(V=="OtoN")
+    {
+        actual_data.sort(function(a,b){return a.Year-b.Year});
+        appendMovies(actual_data);
+    }
+    else
+    {
+        actual_data.sort(function(a,b){return b.Year-a.Year});
+        appendMovies(actual_data);
+    }
+    
+    
+}
+
+
+function filter() {
+    
+    let filter=document.getElementById("filter_year").value;
+
+    let filterYear = actual_data.filter((el)=>{
+        console.log(typeof el.Year);
+        return (el.Year)>=(filter);
+    });
+    console.log(filterYear)
+    appendMovies(filterYear);
+}
+
+</script>

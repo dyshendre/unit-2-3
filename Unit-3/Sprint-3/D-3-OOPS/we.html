@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" id="name">
+        <input type="number" id="id">
+    
+        <input type="text" id="username">
+        <input type="password" id="password">
+    
+        <input type="submit" id="submit">
+    </form>
+</body>
+</html>
+<script>
+    let students=[];
+    let form1=document.getElementById("form1");
+    form1.addEventListener("submit",execute);
+
+    let form=document.querySelector("form");
+    form.addEventListener("submit",signup)
+
+    function signup(event){
+    // console.log("yes2");
+    event.preventDefault();
+    let name=form.name.value;
+    let usename=form.email.value;
+    let password=form.password.value;
+
+    let s1=new User(name,usename,password);
+    console.log("s1:",s1);
+}
+
+
+    class User{
+        #password
+        constructor(name){
+            this.name=name;
+            // this.id=id;
+        }
+        // let form2=document.getElementById("form2");
+
+        signup(username,password){
+            //validation of username & password as per rules
+
+            let isValidated=false;
+
+            //validating username & validating password methods
+
+            isValidated =this.#validateUsername(username) && this.#validatePassword(password);
+
+            if(isValidated){
+                this.username=username;
+                this.#password=password;
+
+                console.log('User registered successfully');
+                students.push(this);
+            }
+            else{
+                console.log('Please follow username or password rules');
+            }
+        }
+        #validateUsername(username){
+        //checking for rules
+        return true;
+        }
+        #validatePassword(password){
+        //checking for rules
+        return true;
+        }
+
+        login(username,password)
+        {
+            if(username===this.username && password==this.#password)
+            {
+            console.log("Logged in");
+            }
+            else{
+                console.log("Authentication failed");
+            }
+        }
+    }
+    // let s1=new User('pablo',1);
+    // console.log('s1',s1);
+    // s1.signup('pablo123','password');
+    
+    // // s1.validatePassword();
+
+    // // s1.login('pablo123','password')
+
+    // // console.log('s1',s1);
+
+    // let s2=new User('picasso',10);
+    // s2.signup('picasso','picasso_password');
+
+    // console.log(students);
+
+ 
+
+    class Student extends User{
+        constructor(name,id){
+            super(name,id)
+            this.numOfAssignments=0;
+        }
+        submitAssignment(){
+            this.numOfAssignments++;
+        }
+    }
+    // let s1=new Student('pablo',7);
+    // // console.log('s1:',s1);
+    
+    // s1.signup('pablo123','pablopass');
+    // // console.log('s1:',s1);
+
+    // s1.login('pablo123','pablopass');
+    // // console.log('s1:',s1);
+
+    // s1.submitAssignment();
+
+    // let s2=new User('picasso',10);
+    // s2.signup('picasso','picasso_password');
+
+    // // console.log(students);
+
+
+    class Admin extends User{
+        constructor(name,id){
+            super(name,id);
+        }
+        removeStudent(id){
+            // remove object from array
+            students=students.filter((el)=>{
+                return el.id!==id;
+            })
+        }
+    }
+    // let n=new Admin('nrupul',3)
+    // console.log('n:',n);
+    // n.removeStudent(7);
+    // console.log(students);
+
+    
+</script>

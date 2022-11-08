@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/navbar.css">
+    <style>
+
+       #outer{
+        display: block;
+        text-align: center;
+        margin: auto;
+        text-align: center;
+       }
+       #container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: auto;
+        gap: 30px;
+        justify-content: center;
+       }
+       .box1{
+        display: block;
+        align-items: center;
+
+       }
+       
+       .box{
+        display: flex;
+        text-align: center;
+        align-items: center;
+       
+        justify-content: center;
+       }
+       .img_div{
+        /* width: 150px; */
+        height: 150px;
+        /* align-items: center; */
+        display: block;
+       margin: 0 auto;
+        width: 50%;
+        margin-bottom: 80px;
+       }
+       img{
+        width: 100%;
+
+       }
+       
+
+    </style>
+</head>
+<body>
+    <div id="navbar"> </div>
+   <div id="outer">
+    <div id="container"></div>
+   </div>
+    
+
+   
+</body>
+</html>
+<script src="./scripts/index.js" type="module"></script>

@@ -1,0 +1,21 @@
+{
+  "products": [
+    {
+      "id": 2,
+      "name": "kitkat",
+      "price": 999
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "icecream",
+      "price": 121
+    },
+    {
+      "id": 2,
+      "name": "kitkat",
+      "price": 999
+    }
+  ]
+}

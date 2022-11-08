@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <style>
+       #hotel_details{
+      margin-left:10%;
+      display:grid;
+      grid-template-columns: repeat(2,1fr);
+      gap:20px;
+    }
+    img{
+      width:80%;
+    }
+    #checkout{
+      width:50%;
+    }
+    input{
+      width:80%;
+      margin:auto;
+      margin:10px;
+    }
+    </style>
+  </head>
+  <body>
+    <h1>Final Checkout</h1>
+    <div id="hotel_details">
+      <!-- Append the hotel detail inside div with id: "hotel_details" -->
+    </div>
+    <div id="checkout">
+      <!-- - The hotel details will be appended inside div with id:- "hotel_details".
+  - The input fields will have ids:- "user_name", "user_number", "check_in" and "check_out"
+  - The book button will have id:- "book"   -->
+     
+      <input type="text" id="user_name" placeholder="enter name">
+      <input type="number" id="user_number" placeholder="enter number">
+      <input type="text" id="user_address" placeholder="enter address">
+      <button id="book" onclick="submit()">Submit</button>
+    </div>
+  </body>
+</html>
+<script src="./scripts/checkout.js"></script>

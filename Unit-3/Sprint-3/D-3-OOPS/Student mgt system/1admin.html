@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar{
+            display: flex;
+            justify-content: space-around;
+        }
+        h1{
+            text-align: center;
+        }
+        #container{
+            display:flex;
+            width:80%;
+            margin:auto;
+            border:1px solid blue;
+        }
+        #static{
+            width:45%;
+            margin-left: 2.5%;
+        }
+        #append{
+            width:45%;
+            margin:auto;
+        }
+        #student1{
+            height:200px;
+            border:1px solid blue;
+        }
+        #assignment1{
+            height:200px;
+            border:1px solid blue;
+        }
+        #lecture1{
+            height:200px;
+            border:1px solid blue;
+        }
+        #student2{
+            height:200px;
+            border:1px solid blue;
+            overflow: scroll;
+        }
+        #assignment2{
+            height:200px;
+            border:1px solid blue;
+            overflow: scroll;
+        }
+        #lecture2{
+            height:200px;
+            border:1px solid blue;
+            overflow: scroll;
+        }
+    </style>
+</head>
+    <body>
+        <div id="navbar">
+            <div><a href="index.html"><button>Signup</button></a></div>
+            <div> <a href="4login.html"><button>Login</button></a></div>
+        </div>
+        <h1>Admin Page</h1>
+        <div id="container">
+          <div id="static">
+            <h2>Add Student</h2>
+            <div id="student1">
+                <input type="text" id="name" placeholder="enter name">
+                <input type="text" id="username" placeholder="enter username">
+                <input type="password" id="password" placeholder="enter password">
+                <button onclick="add_student()">Submit</button>
+            </div>
+           
+            <h2>Add Assignment</h2>
+            <div id="assignment1">
+                <input type="text" id="assignment" placeholder="enter assignment">
+                <button onclick="add_assignment()">Submit</button>
+            </div>
+            
+            <h2>Add Lectures</h2>
+            <div id="lecture1">
+                <input type="text" id="lectures" placeholder="anter lectures">
+                <button onclick="add_lectures()">Submit</button>
+            </div>
+            
+          </div>
+          
+          <div id="append">
+            <h2>Student</h2>
+                <div id="student2">
+
+                </div>
+            <h2>Assignment</h2>
+                <div id="assignment2">
+                
+                </div>  
+            <h2>Lecture</h2>
+                <div id="lecture2">
+                
+                </div> 
+          </div>  
+        </div>
+    </body>
+</html>
+
+<script>
+    let studentsA1=JSON.parse(localStorage.getItem("signup"))||[];
+    let assignmentsA=JSON.parse(localStorage.getItem("assignmenstData"))||[];
+    let lecturesA=JSON.parse(localStorage.getItem("lecturesData"))||[];
+
+
+    let studentsA=studentsA1.filter(function(el){
+        return el.type=="student";
+    })
+    
+    append1(studentsA);
+    append2(assignmentsA);
+    append3(lecturesA);
+    
+function add_student(){
+    let obj1={
+        name: document.getElementById("name").value,
+        username: document.getElementById("username").value,
+        password:document.getElementById("password").value,
+        type:"student"
+    }
+    studentsA.push(obj1);
+    localStorage.setItem("signup",JSON.stringify(studentsA));
+    append1(studentsA);
+}
+function add_assignment(){
+    let assignment=document.getElementById("assignment").value;
+    assignmentsA.push(assignment);
+    localStorage.setItem("assignmenstData",JSON.stringify(assignmentsA));
+    append2(assignmentsA);
+}
+function add_lectures(){
+    let lecture=document.getElementById("lectures").value;
+    lecturesA.push(lecture);
+    localStorage.setItem("lecturesData",JSON.stringify(lecturesA));
+    append3(lecturesA);
+}
+
+function append1(studentsA){
+    let container1=document.getElementById("student2");
+    container1.innerHTML=null;
+    studentsA.forEach(function(el,index){
+        let h1=document.createElement("h4");
+        h1.innerText="Student name: "+el.name;
+
+        let h2=document.createElement("h4");
+        h2.innerText="Student username: "+el.username;
+
+        let h3=document.createElement("h4");
+        h3.innerText="Student password: "+el.password;
+
+        let remove=document.createElement("button");
+        remove.innerText="Remove";
+        remove.addEventListener("click",function(){
+            remove_data1(index);
+        })
+        
+        container1.append(h1,h2,h3,remove);
+    })
+}
+function append2(assignmentsA){
+    let container2=document.getElementById("assignment2");
+    container2.innerHTML=null;
+    assignmentsA.forEach(function(el,index){
+        let h3=document.createElement("h4");
+        h3.innerText="Assignment: "+el;
+        
+        let remove=document.createElement("button");
+        remove.innerText="Remove";
+        remove.addEventListener("click",function(){
+            remove_data2(index);
+        })
+        container2.append(h3,remove);
+    })
+}
+function append3(lecturesA){
+    let container3=document.getElementById("lecture2");
+    container3.innerHTML=null;
+    lecturesA.forEach(function(el,index){
+        let h3=document.createElement("h4");
+        h3.innerText="Lecture: "+el;
+
+        let remove=document.createElement("button");
+        remove.innerText="Remove";
+        remove.addEventListener("click",function(){
+            remove_data3(index);
+        })
+        
+        container3.append(h3,remove);
+    })
+}
+function remove_data1(index){
+    studentsA.splice(index,1);
+    localStorage.setItem("signup",JSON.stringify(studentsA));
+    append1(studentsA);
+}
+function remove_data2(index){
+    assignmentsA.splice(index,1);
+    localStorage.setItem("assignmenstData",JSON.stringify(assignmentsA));
+    append2(assignmentsA);
+}
+function remove_data3(index){
+    lecturesA.splice(index,1);
+    localStorage.setItem("lecturesData",JSON.stringify(lecturesA));
+    append3(lecturesA);
+}
+</script>

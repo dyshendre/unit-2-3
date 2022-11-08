@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        <button onclick="sortLTH()">Sort price low to high</button>
+        <button onclick="sortHTL()">Sort price high to low</button>
+        <button onclick="filterGTE4()"></button>
+        <div id="items"></div>
+    </body>
+</html>
+<script>
+    let getData=async()=>{
+        let res=await fetch("http://localhost:3000/api/items");
+        let data=await res.json();
+        console.log(data);
+    }
+
+    //Append data here
+
+    let sortLTH=async()=>{
+        let res=await fetch("http://localhost:3000/api/items?_sort=price&_order=asc");
+        let data=await res.json();
+        console.log(data);
+    }
+
+    let sortHTL=async()=>{
+        let res=await fetch("http://localhost:3000/api/items?_sort=price&_order=desc");
+        let data=await res.json();
+        console.log(data);
+    }
+
+    let filterGTE4=async()=>{
+        let res=await fetch("http://localhost:3000/api/items?rating_gte=4");
+        let data=await res.json();
+        console.log(data);
+    }
+</script>

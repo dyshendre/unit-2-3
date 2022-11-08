@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    #navbar {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    #navbar>div:nth-child(1) {
+      /* border:1px solid red; */
+      margin-top: -25px;
+    }
+    #hotels_list{
+      margin-left:10%;
+      display:grid;
+      grid-template-columns: repeat(2,1fr);
+      gap:20px;
+    }
+    .class{
+      width:40%;
+    }
+    img{
+      width:80%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar">
+    <div>
+      <h2>Hotel App</h2>
+    </div>
+    <!-- the search-box id:- "query"
+ - the log-in and sign-up link will have ids:- "login" and "signup" -->
+    <form>
+      <input type="text" id="query">
+      <input type="submit" id="submit">
+    </form>
+    <a href="login.html" id="login">Login</a>
+    <a href="signup.html" id="signup">Signup</a>
+    <a href="checkout.html" id="checkout">Checkout</a>
+    <button id="logout" >logout</button>
+  </div>
+  <div id="sorting">
+    <!-- sort by price low to high Id:- "sort_lth"
+ - sort by price high to low Id:- "sort_htl"
+ - Filter Ac hotels Id:- "filter_ac"
+ - Filter Non Ac hotels Id:- "filter_nonac" -->
+ <select id="sort_price" onchange="sort()">
+  <option value="">Select</option>
+  <option value="LtoH">Low to High</option>
+  <option value="HtoL">High to Low</option>
+ </select>
+
+ <select id="sort_ac" onchange="filter()">
+  <option value="">Select</option>
+ <option value="true" >AC</option>
+ <option value="false">Non-AC</option>
+</select>
+  </div>
+  <div>
+    <!-- - Append all fetched hotels inside div with id:- "hotels_list"
+ - Every hotel card will have id:-  "hotel"
+ - The book now button will have class as "book" -->
+ <div id="hotels_list">
+
+ </div>
+  </div>
+</body>
+
+</html>
+<script src="./scripts/index.js"></script>

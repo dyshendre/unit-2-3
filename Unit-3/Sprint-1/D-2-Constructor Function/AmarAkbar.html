@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    let Amar={
+        location: 'Goa',
+        borrow: function(skill){
+            console.log(skill+'- '+'Singer');
+        }
+    }
+
+    let Akbar={
+        location: 'Mumbai',
+        borrow: function(skill){
+            console.log(skill+'- '+'Chef');
+        }
+    }
+
+ let Anthony={
+    location: 'Kashmir',
+        borrow: function(skill){
+            console.log(skill+'- '+'Magician');
+        }
+ }
+
+console.log('Akbar is borrowing Singing skill from Amar');
+Amar.borrow.call(Akbar,'Akbar');
+console.log('*********************************************')
+console.log('Amar is borrowing Chef skill from Akbar');
+Akbar.borrow.call(Amar,'Amar');
+console.log('*********************************************')
+console.log('Akbar is borrowing Magic skill from Anthony');
+Anthony.borrow.call(Akbar,'Akbar');
+
+</script>

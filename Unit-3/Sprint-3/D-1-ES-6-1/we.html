@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="filter()">Sort</button>
+    <input type="text" id="query">
+    <button onclick="search()">search</button>
+    <div id="search_results">
+        
+    </div>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+    const API_KEY="AIzaSyCYuvLXXmUfMQRowIvu-gFYCs1Bnszl8t4";
+    
+let q="";
+let search=async()=>{
+    let query=document.getElementById("query").value;
+    // getData(query);
+    let data=await getData(query);
+    appendVideos(data);
+    q=query;
+};
+let getData=async(query)=>{
+    let url=`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${query}&key=${API_KEY}`; 
+    let res=await fetch(url);
+   
+    // let data=await res.json();
+    // console.log("data:",data);
+    // return data.items;
+
+    let {items}=await res.json();
+    console.log("items: ",items);
+    return items;
+};
+
+let appendVideos=(data)=>{
+    let container=document.getElementById("container");
+    container.innerHTML=null;
+    data.forEach((el)=>{
+        let div=document.createElement("div");
+        div.onclick=()=>{
+            saveVideo(el);
+        };
+        div.setAttribute("class","videos");
+
+        let img=document.createElement("img");
+        img.src=el.snippet.thumbnails.medium.url;
+
+        let h3=document.createElement("h3");
+        h3.innerText=el.snippet.title;
+
+        div.append(img,h3);
+
+        container.append(div);
+    });
+}
+
+let saveVideo=(data)=>{
+    localStorage.setItem("video",JSON.stringify(data));
+    window.location.href="video.html";
+}
+
+let filter = async () => {
+    let data= await getData(q);
+    console.log(data);
+    data= data.filter((el)=>{
+        return el.snippet.channelId==="UCvC4D8onUfXzvjTOM-dBfEA";
+    });
+    append(data);
+}
+</script> 

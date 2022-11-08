@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    let amar={
+        location:"Goa",
+        skills:["singer"]
+    }
+    let akbar={
+        location:"Mumbai",
+        skills:["chef"]
+    }
+    let anthony={
+        location:"kashmir",
+        skills:["Magician"]
+    }
+    function skill_borrow(prof){
+        this.skills.push(prof)
+    }
+
+    skill_borrow.call(amar,akbar.skills[0])
+    skill_borrow.call(amar,anthony.skills[0])
+    skill_borrow.call(akbar,amar.skills[0])
+    skill_borrow.call(akbar,anthony.skills[0])
+    skill_borrow.call(anthony,amar.skills[0])
+    skill_borrow.call(anthony,akbar.skills[0])
+console.log(amar)
+console.log(akbar)
+console.log(anthony)
+</script>

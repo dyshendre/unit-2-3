@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body>div:nth-child(2)
+        {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <input id="one" type="number" placeholder="enter 1st number">
+    <input id="two" type="number" placeholder="enter 2nd number">
+    </div>
+    <div>
+    <button onClick="add()">Add</button>
+    <button onClick="subs()">Substract</button>
+    <button onClick="mul()">Multiply</button>
+    <button onClick="divide()">Divide</button>
+    </div>
+</body>
+</html>
+
+<script>
+   
+
+   function add(){
+    let num1=document.getElementById("one").value;
+    let num2=document.getElementById("two").value;
+      alert((+num1)+(+num2))
+    }
+
+    function subs(){
+    let num1=document.getElementById("one").value;
+    let num2=document.getElementById("two").value;
+      alert((+num1)-(+num2))
+    }
+
+    function mul(){
+    let num1=document.getElementById("one").value;
+    let num2=document.getElementById("two").value;
+      alert((+num1)*(+num2))
+    }
+
+    function divide(){
+        let num1=document.getElementById("one").value;
+        let num2=document.getElementById("two").value;
+      alert((+num1)/(+num2))
+    }
+</script>

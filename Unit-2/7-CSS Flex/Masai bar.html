@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #navbar>div:first-child{
+            width:10%;
+            height: 100%;
+        }
+
+        #navbar>div:last-child{
+            width:70%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+        #navbar > div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+        p+div{
+            display: flex;
+            background-color: #f2fdff;
+            justify-content: center;
+            align-items: center;
+            padding:0px 20px;
+        }
+        p+div>img{
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+        select{
+            border: 0;
+        }
+        button{
+            padding: 15px;
+            border-radius: 5px;
+            background-color: white;
+            border: 1px solid red;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+      <div>
+          <img src="https://www.masaischool.com/img/navbar/logo.svg" alt="">
+      </div>
+
+      <div>
+          <select>
+              <option value="">COURSES</option>
+          </select>
+          <p>FEES & ISA</p>
+          <p>ABOUT US</p>
+          <p>HIRE FROM US</p>
+          <p>FAQ</p>
+          <p>EVENTS</p>
+          <div>
+          <p>REFER & EARN</p>
+          <img src="https://www.masaischool.com/img/referral/hand.png" alt="">
+          </div>
+          <button>LOG IN</button>
+      </div>
+    </div>
+</body>
+</html>

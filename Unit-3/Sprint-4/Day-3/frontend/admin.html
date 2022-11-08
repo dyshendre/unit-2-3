@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        <div>
+            <h1>Add Products</h1>
+            <input type="number" id="id" placeholder="id">
+            <input type="text" id="name" placeholder="name">
+            <input type="number" id="price" placeholder="price">
+           
+            <button onclick="addProduct()">Add</button>
+        </div> 
+
+        <div>
+            <h1>Delete Product</h1>
+            <input type="number" id="delete_id">
+            <button onclick="deleteProduct()">Delete</button>
+        </div>
+
+        <div>
+            <h1>Put Product</h1>
+            <input type="number" id="put_id">
+
+            <button onclick="updateProduct()">Put</button>
+        </div>
+    </body>
+</html>
+
+
+<script>
+async function addProduct(){
+    let product={
+        id: document.getElementById("id").value,
+        name: document.getElementById("name").value,
+        price: document.getElementById("price").value,
+    };
+    product=JSON.stringify(product);
+
+    let response=await fetch ('http://127.0.0.1:3000/api/products',{
+        method:'POST',
+        body:product,
+        headers:{
+            'Content-Type':'application/json'
+        }
+        
+    })
+    console.log('response',response);
+}
+
+
+async function deleteProduct(){
+    let id=document.getElementById('delete_id').value;
+    let response=await fetch(`http://127.0.0.1:3000/api/products/${id}`,{
+
+        method:"DELETE",
+        headers:{
+            'Content-Type':'application/json'
+        }
+    });
+    let data=await response.json();
+
+}
+
+async function updateProduct(){
+    let id=document.getElementById('put_id').value;
+
+    let response=await fetch(`http://127.0.0.1:3000/api/products/${id}`,{
+        method:'PUT',
+        body:JSON.stringify({
+            name:'messi',
+            price:8000,
+        }),
+
+        headers:{
+            'Content-Type':'application/json'
+        }
+    })
+    let data=await response.json();
+}
+</script>

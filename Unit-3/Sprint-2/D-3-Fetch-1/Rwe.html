@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            width:80%;
+            margin:auto;
+            display:grid;
+            grid-template-columns: repeat(3,1fr);
+            grid-template-rows: auto;
+            gap:20px;
+        }
+        img{
+            width:50%;
+        }
+        h2{
+            color:red;
+        }
+    </style>
+</head>
+    <body>
+        <button onclick="sortLtoH()">sort low to high</button>
+        <button onclick="sortHtoL()">sort high to low</button>
+        Filter: <input type="text" oninput="filter()" id="query">
+        <div id="container"></div>
+        
+    </body>
+</html>
+<script>
+//     let x=fetch('https://fakestoreapi.com/products')
+//     .then(function(res){
+//        return res.json(res);
+//     })
+//     .then(function(res){
+//         console.log("res:",res);
+//         append(res);
+//     })
+//    .catch(function(err){
+//     console.log("err:",err);
+//    })
+
+
+    let data;
+   async function getData(){
+    try{
+    let res=await fetch('https://fakestoreapi.com/products');
+    
+    //convert the stream into actual data
+    data=await res.json();
+    console.log("data:",data)
+    append(data)
+    }catch(err){
+        console.log("err:",err);
+    }
+   }
+   getData();
+
+
+   function append(data)
+   {
+    let container=document.getElementById("container");
+    container.innerHTML=null;
+    data.forEach(function(el){
+        
+        let div=document.createElement("div");
+        
+        let title=document.createElement("h2");
+        title.innerText="Title: "+el.title;
+
+        let price=document.createElement("p");
+        price.innerText="Price: $"+el.price;
+
+        let description=document.createElement("p");
+        description.innerText="Description: "+el.description
+
+        let category=document.createElement("p");
+        category.innerText="Category: "+el.category;
+
+        let image=document.createElement("img");
+        image.src=el.image;
+
+        div.append(title,price,description,category,image);
+        container.append(div);
+    })
+   }
+
+   function sortLtoH(){
+     //to get each time new original data because sort change the order of elements of data array
+    let copy_data=[...data];
+    copy_data=copy_data.sort(function(a,b){
+        return a.price-b.price
+    });
+    console.log("data:",copy_data);
+    append(copy_data);
+   }
+   function sortHtoL(){
+    let copy_data=[...data];
+    copy_data=copy_data.sort(function(a,b){
+        return b.price-a.price
+    });
+    console.log("data:",copy_data);
+    append(copy_data);
+   }
+
+   function filter(){
+    let query=document.getElementById("query").value;
+    console.log("query:",query);
+    
+    //to get each time new original data
+    let copy_data=data;
+    
+    copy_data=copy_data.filter(function(el){
+        return el.title.toLowerCase().includes(query);
+    });
+    append(copy_data);
+   }
+</script>

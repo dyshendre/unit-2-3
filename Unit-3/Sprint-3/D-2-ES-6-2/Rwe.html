@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <body>
+        
+    </body>
+</html>
+<script>
+
+//Stack
+
+//es6 class: we are doing same thing as CF but syntax is different
+
+//constructor function
+
+//function, return, new, this
+
+//why we have this syntax then?
+
+//java & c++ ( object, classes )
+
+//javascript ( functions )
+
+// function helloworld() {
+//   //ternary
+//   let { name } = { name: 'utkarsh' };
+//   return name;
+// }
+
+class Stack {
+  constructor() {
+    this.length = 0;
+    this.stack_contents = []; //stack_contennts is an array internally
+  }
+
+  push(...el) {
+    console.log('el:', el);
+    //el is an number
+
+    el.forEach((element) => {
+      this.stack_contents.push(element);
+      this.length++;
+    });
+
+    return this.stack_contents;
+  }
+
+  remove() {
+    let removed_value = this.stack_contents.pop();
+    this.length--;
+
+    return removed_value;
+  }
+}
+
+//try to create a new stack_contennts and try pushing
+
+// let stack1 = new Stack();
+
+// stack1.push(1, 2, 3, 4);
+
+// stack1.remove();
+// console.log('stack1:', stack1);
+
+// let arr = new Array(1,2,3)
+let arr2 = [1, 2, 3];
+console.log('arr2:', arr2);
+
+//ES6 Class
+
+//syntactic suger
+
+//1. class is a contructor function, it just looks diifferent (syntax)
+//2. what does es6 class returns? object
+//3. how do you execute "new Stack()"
+//4. because of object oriented programming architecture.
+
+//enumerable
+
+//lexical
+
+{
+}
+
+function outer() {
+  let message = 'i am from outer';
+
+  return function () {
+    console.log('hello world');
+  };
+}
+
+let x = outer();
+console.log('x:', x);
+
+x();
+
+// p.onclick = () => {
+
+//   showthatmovie(el)
+// }
+//create, execute, destroy - generel
+//create, execute, does not destroy - special ( DEPENDENCY )
+</script>

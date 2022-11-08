@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #showdicenumber{
+        display: flex;
+        justify-content: space-evenly;
+        
+         border: 1px solid black;
+         
+        }
+        #member-1{
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: white;
+        }
+        #member-2{
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #member-3{
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #roll{
+            display: block;
+            margin: auto;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 10px;
+            padding: 10px;
+        }
+        #winner{
+            width: 200px;
+            border:  1px solid red;
+            margin: auto;
+            margin-top: 20px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: rgb(56, 22, 152);
+        }
+    </style>
+</head>
+<body>
+   <div id="showdicenumber">
+    <div id="member-1">Member-A</div>
+    <div id="member-2">Member-B</div>
+    <div id="member-3">Member-C</div>
+   </div>
+    <button id="roll">Roll the Dice</button>
+    <div id="winner">result</div>
+</body>
+</html>
+
+<script>
+  document.querySelector("#roll").addEventListener("click",dice)
+
+  function dice(){
+    
+   
+   let x=first(7);
+   let y=second(7);
+   let z=third(7);
+   if(x==0){
+    x++;
+   }
+   if(y==0){
+    y++;
+   }
+   if(z==0){
+   z++;
+   }
+   if(x>y && x>z){
+    document.querySelector("#member-1").style.backgroundColor="green"
+    document.querySelector("#member-1").style.color="white"
+    document.querySelector("#winner").innerHTML="winner is A"
+   }
+   if(y>x && y>z){
+    document.querySelector("#member-2").style.backgroundColor="green"
+    document.querySelector("#member-2").style.color="white"
+    document.querySelector("#winner").innerHTML="winner is B"
+   }
+   if(z>x && z>y){
+    document.querySelector("#member-3").style.backgroundColor="green"
+    document.querySelector("#member-3").style.color="white"
+    document.querySelector("#winner").innerHTML="winner is C"
+   }
+   if(x==y==z){
+    document.querySelector("#member-1").style.backgroundColor="blue"
+    document.querySelector("#member-2").style.backgroundColor="blue"
+    document.querySelector("#member-3").style.backgroundColor="blue"
+    document.querySelector("#member-1").style.color="white"
+    document.querySelector("#member-2").style.color="white"
+    document.querySelector("#member-3").style.color="white"
+    document.querySelector("#winner").innerHTML=" Draw"
+   }
+   if(x==y){
+    document.querySelector("#member-1").style.backgroundColor="blue"
+    document.querySelector("#member-2").style.backgroundColor="blue"
+    document.querySelector("#member-1").style.color="white"
+    document.querySelector("#member-2").style.color="white"
+    document.querySelector("#winner").innerHTML="ROLL AGAIN"
+   }
+   if(y==z){
+    document.querySelector("#member-2").style.backgroundColor="blue"
+    document.querySelector("#member-3").style.backgroundColor="blue"
+    document.querySelector("#member-2").style.color="white"
+    document.querySelector("#member-3").style.color="white"
+    document.querySelector("#winner").innerHTML="ROLL AGAIN"
+   }
+   if(z==x){
+    document.querySelector("#member-1").style.backgroundColor="blue"
+    document.querySelector("#member-3").style.backgroundColor="blue"
+    document.querySelector("#member-1").style.color="white"
+    document.querySelector("#member-3").style.color="white"
+    document.querySelector("#winner").innerHTML="ROLL AGAIN"
+  
+   }
+   if((x>y && x<z )|| (x>z && x<y)){
+    document.querySelector("#member-1").style.backgroundColor="yellow"
+    document.querySelector("#member-1").style.color="black"
+   }
+   if((y>x && y<z) || (y<x && y>z)){
+    document.querySelector("#member-2").style.backgroundColor="yellow"
+    document.querySelector("#member-2").style.color="black"
+   }
+   if((z>x && z<y) || (z<x && z>y)){
+    document.querySelector("#member-3").style.backgroundColor="yellow"
+    document.querySelector("#member-3").style.color="black"
+   }
+
+   if((x<y && x<z )){
+    document.querySelector("#member-1").style.backgroundColor="red"
+    document.querySelector("#member-1").style.color="white"
+   }
+   if((y<x && y<z) ){
+    document.querySelector("#member-2").style.backgroundColor="red"
+    document.querySelector("#member-2").style.color="white"
+   }
+   if((z<x && z<y) ){
+    document.querySelector("#member-3").style.backgroundColor="red"
+    document.querySelector("#member-3").style.color="white"
+   }
+   document.querySelector("#member-1").innerHTML=x;
+   document.querySelector("#member-2").innerHTML=y;
+   document.querySelector("#member-3").innerHTML=z;
+  }
+
+ function first(max){
+ return Math.floor(Math.random()*max)
+ 
+ }
+ function second(max){
+  
+    return  Math.floor(Math.random()*max)
+ }
+ function third(max){
+  
+    return  Math.floor(Math.random()*max)
+ }
+</script>

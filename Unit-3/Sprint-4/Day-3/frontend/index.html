@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        #container{
+            display: flex;
+            width:80%;
+            margin:auto;
+        }
+        form{
+            width:10%;
+        }
+        input{
+            margin-top:5% ;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center">Flipkart Inventory System</h1>
+    <div id="container">
+        <div id="register-form">
+            <h1>Register</h1>
+            <form>
+                <input type="text" id="name" placeholder="name">
+                <input type="text" id="email" placeholder="email">
+                <input type="password" id="password" placeholder="password">
+                <input type="text" id="username" placeholder="username">
+                <input type="number" id="mobile" placeholder="mobile">
+                <input type="text" id="description" placeholder="description">
+            </form>
+            <button onclick="Register()">Signup</button>
+        </div>
+
+        <div id="login-form">
+            <h1>Login</h1>
+            <form>
+                <input type="text" id="login-username" placeholder="Username">
+                <input type="text" id="login-password" placeholder="Password">
+            </form>
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+</body>
+</html>
+<script src="./index.js"></script>

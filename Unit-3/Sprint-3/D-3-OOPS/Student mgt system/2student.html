@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar{
+            display: flex;
+            justify-content: space-around;
+        }
+        #assignment2{
+            height:200px;
+            border:1px solid blue;
+            overflow: scroll;
+        }
+        #lecture2{
+            height:200px;
+            border:1px solid blue;
+            overflow: scroll;
+        }
+    </style>
+</head>
+    <body>
+        <div id="navbar">
+            <div><a href="index.html"><button>Signup</button></a></div>
+            <div> <a href="4login.html"><button>Login</button></a></div>
+            <div><a href="5profile.html"><button>Profile</button></a></div>
+        </div>
+        <h1>Student Page</h1>
+        <div id="append">
+            <h2>Assignment</h2>
+                <div id="assignment2">
+                
+                </div>  
+            <h2>Lecture</h2>
+                <div id="lecture2">
+                
+                </div> 
+          </div>  
+    </body>
+</html>
+
+<script>
+    let assignmentsA=JSON.parse(localStorage.getItem("assignmenstData"))||[];
+    let lecturesA=JSON.parse(localStorage.getItem("lecturesData"))||[];
+
+    append2(assignmentsA);
+    append3(lecturesA);
+
+    function append2(assignmentsA){
+    let container2=document.getElementById("assignment2");
+    container2.innerHTML=null;
+    assignmentsA.forEach(function(el,index){
+        let h3=document.createElement("h4");
+        h3.innerText="Assignment: "+el;
+        
+        container2.append(h3);
+    })
+}
+function append3(lecturesA){
+    let container3=document.getElementById("lecture2");
+    container3.innerHTML=null;
+    lecturesA.forEach(function(el,index){
+        let h3=document.createElement("h4");
+        h3.innerText="Lecture: "+el;
+        
+        container3.append(h3);
+    })
+}
+</script>

@@ -1,0 +1,65 @@
+/* Fill CSS here */
+h1{
+    text-align: center;
+    color: blue;
+}
+div{
+    display:flex;
+    justify-content: space-around;
+}
+
+form{
+    margin-top: 50px;
+    width:30%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding:30px;
+}
+label{
+    font-size: 20px;
+}
+table{
+    width:60%;
+    margin:auto;
+    margin-top:50px;
+    text-emphasis: center;
+}
+table td,
+table th{
+    border:1px solid transparent;
+    padding: 7px;
+    text-align: center;
+}
+
+table th{
+    padding-top:12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: blue;
+    color: white;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type="submit"]{
+    background-color: blue;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 15px;
+    width:100%;
+    font-size:20px;
+    border: 1px solid transparent;
+}
+

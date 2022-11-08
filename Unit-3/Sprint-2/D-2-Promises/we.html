@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="https://c.tenor.com/K2UGDd4acJUAAAAC/load-loading.gif" alt="">
+</body>
+
+</html>
+
+<script>
+    function bankServer() {
+        //Logic
+        return true; //false
+    }
+
+    let payment_promise = new Promise(function (resolve, reject) {
+        let pin = bankServer();
+
+        setTimeout(function () {
+            if (pin) {
+                resolve("Payment Successful");
+            } else {
+                reject("Try again later");
+            }
+        }, 3000)
+    });
+    // console.log(payment_promise);
+
+    let image = document.querySelector("img");
+
+    // payment_promise.then(function(res){
+    //     console.log(res);
+    //     image.src="https://static.wixstatic.com/media/ac2dcc_3ca088e361434dd18e6218c661252462~mv2.gif";
+    // })
+
+    // payment_promise.catch(function(rej){
+    //     console.log(rej);
+    //     image.src="https://c.tenor.com/K9-SqJMNjkEAAAAC/emotional-damage.gif";
+    // })
+
+    async function content() {
+        try {
+            let res = await payment_promise;
+            console.log(res);
+            image.src = "https://static.wixstatic.com/media/ac2dcc_3ca088e361434dd18e6218c661252462~mv2.gif";
+        } catch (err) {
+            console.log(err);
+            image.src = "https://c.tenor.com/K9-SqJMNjkEAAAAC/emotional-damage.gif";
+        }
+    }
+    content();
+    /*syntax of async function*/
+    // try{
+    //     //Resolve
+    // }catch(err){
+    //     //Reject
+    // }
+</script>

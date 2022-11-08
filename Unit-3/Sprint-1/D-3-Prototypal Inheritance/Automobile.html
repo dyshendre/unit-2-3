@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+</body>
+</html>
+<script>
+    // Prototype Inheritance
+    let protoWheel={
+        tyreSize:"12",
+        tyreMaterial:"xyz",
+        tyrePrice:"2000",
+    }
+
+    let firstWheel= Object.create(protoWheel);
+    console.log('firstWheel:',firstWheel)
+
+    // Constructor Function
+    function template(s,m,p){
+        this.size=s;
+        this.material=m;
+        this.price=p;
+    }
+    let secondWheel=new template('15','abc','1800');
+    console.log("secondWheel:",secondWheel);
+
+    let thirdWheel=new template('18','abc','2200');
+    console.log("thirdWheel:",thirdWheel);
+
+    let fourthWheel=new template('16','pqr','2100');
+    console.log("fourthWheel:",fourthWheel); 
+    </script>
+

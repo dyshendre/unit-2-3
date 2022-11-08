@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+
+        #navBar {
+            width: 80%;
+            display: flex;
+            height: 50px;
+            align-items: center;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            justify-content: space-around;
+            margin:auto;
+        }
+
+
+
+        #input {
+            margin-top: 0px;
+            margin: auto;
+            padding: 1%;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        input{
+            width: 80%;
+            font-size: 20px;
+            margin-top: 10px;
+            margin-left: 10%;
+        }
+
+        button {
+            font-size: 20px;
+            background-color: rgb(10, 240, 163);
+            border: transparent;
+            width: 15%;
+            margin-top: 10px;
+            margin-left: 10%;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        #slide_show{
+            width:50%;
+            height:45%;
+            margin: auto;
+        }
+        img{
+            width:100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navBar">
+
+        <a href="index.html">
+
+            <div class="menu">HOME</div>
+
+        </a>
+
+        <a href="Login.html">
+
+            <div class="menu">Log In</div>
+
+        </a>
+
+        <a href="Signup.html">
+
+            <div class="menu">Sign Up</div>
+
+        </a>
+
+    </div>
+<div id="input">
+    <h1 style="text-align:center">Slide Show</h1>
+    <input type="text" id="image_url">
+    <button onclick="addImage()">Submit</button>
+    <button onclick="slideShow()">Start Slide Show</button>
+    <button onclick="pause()">Pause</button>
+</div>
+    <div id="slide_show"></div>
+
+</body>
+</html>
+
+<script>
+    let images=JSON.parse(localStorage.getItem("images"))|| [];
+    
+    
+    function addImage(){
+        let img_url=document.getElementById("image_url");
+       
+        images.push(img_url.value);
+        
+        localStorage.setItem("images",JSON.stringify(images));
+        img_url.value=null;
+    }
+    let Pause;
+    let i=0;
+    function slideShow(){
+        let container1=document.getElementById("slide_show");
+
+        Pause=setInterval(function(){
+            // for repeating slide show
+            console.log(i);
+            if (i===images.length){
+                i=0;
+            }
+            // for slide show
+            let img=document.createElement("img");
+            img.src=images[i];
+            container1.innerHTML=null;
+            container1.append(img);
+            i++;
+        },2000);
+    }
+
+    // Pause
+    function pause(){
+        clearInterval(Pause);
+    }
+</script>
